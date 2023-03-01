@@ -1,0 +1,14 @@
+import Header from "@/components/header";
+import SidePanel from "@/components/sidepanel";
+import React from "react";
+
+export default function AdminLayout(props: any) {
+
+    return <>
+        <Header />
+        <div className="flex">
+            <SidePanel />
+            {props.children}
+        </div>
+    </>
+}

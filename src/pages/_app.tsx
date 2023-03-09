@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   // or else use page component only.
   const isDashboardRoute = router.pathname.includes("/dashboard")
 
-  return <NextUIProvider theme={themeConfig}>
+  return <NextUIProvider theme={themeConfig} disableBaseline>
     {isDashboardRoute ? <AdminLayout>
       <Component {...pageProps} />
     </AdminLayout> :

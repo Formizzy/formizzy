@@ -5,10 +5,12 @@ import React from "react";
 export default function AdminLayout(props: any) {
 
     return <>
-        <Header />
-        <div className="flex">
+        {/* <Header /> */}
+        <div className="flex w-screen">
             <SidePanel />
-            {props.children}
+            <div className="bg-slate-50 w-full">
+                {props.children}
+            </div>
         </div>
     </>
 }

@@ -5,6 +5,7 @@ import { Button, Checkbox, Input, Spacer, theme } from "@nextui-org/react";
 import GoogleLogo from "../assets/img/Google_Logo.png";
 import Link from 'next/link';
 import Icons from '@/components/icons';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 function LoginPage() {
     return (
@@ -16,15 +17,17 @@ function LoginPage() {
 
                     {/* Social login section */}
                     <div className='flex'>
-                        <Button css={{ backgroundColor: '$btnBg', color: "#030229", height: 40 }} size="sm" >
+                        {/* <Button css={{ backgroundColor: '$btnBg', color: "#030229", height: 40 }} size="sm" >
                             <Image src={GoogleLogo} alt="Google Logo" className='mr-1' />
                             Google
-                        </Button>
+                        </Button> */}
+                        <GoogleSignin />
                         <Spacer x={1} />
-                        <Button css={{ backgroundColor: '$black', height: 40 }} size="sm" >
+                        {/* <Button css={{ backgroundColor: '$black', height: 40 }} size="sm" >
                             <Icons iconName='Github' />
                             GitHub
-                        </Button>
+                        </Button> */}
+                        <GithubSignin />
                     </div>
 
                     <Spacer y={1} />
@@ -65,3 +68,71 @@ function LoginPage() {
 }
 
 export default LoginPage
+
+async function callNodejsForGoogle(body:any) {
+    const response = await fetch(`http://localhost:3001/signin-with-google/signin-with-google`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user: body})
+      }).then(res=>res.json())
+      console.log("response",response)
+}
+
+function GoogleSignin() {
+    const { data: session } = useSession();
+    const handleLogin = (e: any) => {
+        console.log('before signin')
+        e.preventDefault();
+        signIn('google');
+        console.log("after signin")
+    };
+
+    if (session) {
+        console.log(session);
+        // callNodejsForGoogle(session.user)
+        return <div><p>Signed in as {session.user?.email}</p>;
+        <button onClick={()=>signOut()}>Sign Out</button></div>
+    }
+
+    return (
+        <>
+            <p>You are not signed in.</p>
+            <button onClick={(e) => handleLogin(e)}>Sign in with Google</button>
+        </>
+    );
+}
+
+
+
+async function callNodejsForGithub(body:any) {
+    const response = await fetch(`http://localhost:3001/signin-with-github/signin-with-github`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user: body})
+      }).then(res=>res.json())
+      console.log("response",response)
+}
+
+function GithubSignin() {
+    const { data: session } = useSession();
+    const handleLogin = (e: any) => {
+        console.log('before signin')
+        e.preventDefault();
+        signIn('github');
+        console.log("after signin")
+    };
+
+    if (session) {
+        console.log(session);
+        callNodejsForGithub(session.user)
+        return <div><p>Signed in as {session.user?.email}</p>;
+        <button onClick={()=>signOut()}>Sign Out</button></div>
+    }
+
+    return (
+        <>
+            <p>You are not signed in.</p>
+            <button onClick={(e) => handleLogin(e)}>Sign in with Github</button>
+        </>
+    );
+}

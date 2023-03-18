@@ -9,5 +9,8 @@ export default createTheme({
       error: '#FCC5D8',
       btnBg: "#F7F7F8"
     },
+    fonts: {
+      sans: "'Nunito', sans-serif;"
+    }
   }
 })

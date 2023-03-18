@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Dashboard() {
+export default function SettingsPage() {
 
-    return <div >
-        {/* Dashboard */}
+    return <div>
+        Settings
         {/* <img src="https://snipboard.io/WBiubJ.jpg" /> */}
     </div>
 }

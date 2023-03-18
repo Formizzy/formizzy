@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Dashboard() {
+export default function AnalyticsPage() {
 
-    return <div >
-        {/* Dashboard */}
+    return <div>
+        Analytics
         {/* <img src="https://snipboard.io/WBiubJ.jpg" /> */}
     </div>
 }

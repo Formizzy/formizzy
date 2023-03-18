@@ -23,10 +23,11 @@ function LoginPage() {
                         </Button> */}
                         <GoogleSignin />
                         <Spacer x={1} />
-                        <Button css={{ backgroundColor: '$black', height: 40 }} size="sm" >
+                        {/* <Button css={{ backgroundColor: '$black', height: 40 }} size="sm" >
                             <Icons iconName='Github' />
                             GitHub
-                        </Button>
+                        </Button> */}
+                        <GithubSignin />
                     </div>
 
                     <Spacer y={1} />
@@ -68,7 +69,7 @@ function LoginPage() {
 
 export default LoginPage
 
-async function callNodejs(body:any) {
+async function callNodejsForGoogle(body:any) {
     const response = await fetch(`http://localhost:3001/signin-with-google/signin-with-google`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -88,8 +89,7 @@ function GoogleSignin() {
 
     if (session) {
         console.log(session);
-        callNodejs(session.user)
-        // use session.accessToken to send the token to your backend
+        // callNodejsForGoogle(session.user)
         return <div><p>Signed in as {session.user?.email}</p>;
         <button onClick={()=>signOut()}>Sign Out</button></div>
     }
@@ -98,6 +98,41 @@ function GoogleSignin() {
         <>
             <p>You are not signed in.</p>
             <button onClick={(e) => handleLogin(e)}>Sign in with Google</button>
+        </>
+    );
+}
+
+
+
+async function callNodejsForGithub(body:any) {
+    const response = await fetch(`http://localhost:3001/signin-with-github/signin-with-github`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user: body})
+      }).then(res=>res.json())
+      console.log("response",response)
+}
+
+function GithubSignin() {
+    const { data: session } = useSession();
+    const handleLogin = (e: any) => {
+        console.log('before signin')
+        e.preventDefault();
+        signIn('github');
+        console.log("after signin")
+    };
+
+    if (session) {
+        console.log(session);
+        callNodejsForGithub(session.user)
+        return <div><p>Signed in as {session.user?.email}</p>;
+        <button onClick={()=>signOut()}>Sign Out</button></div>
+    }
+
+    return (
+        <>
+            <p>You are not signed in.</p>
+            <button onClick={(e) => handleLogin(e)}>Sign in with Github</button>
         </>
     );
 }

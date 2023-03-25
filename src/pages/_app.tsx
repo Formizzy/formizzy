@@ -4,7 +4,8 @@ import { NextUIProvider } from '@nextui-org/react'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import themeConfig from "theme.config";
-import { SessionProvider } from 'next-auth/react';
+import { Provider } from 'react-redux'
+import { store } from '@/redux/store'
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -13,12 +14,13 @@ export default function App({ Component, pageProps }: AppProps) {
   // or else use page component only.
   const isDashboardRoute = router.pathname.includes("/dashboard")
 
-  return (<SessionProvider session={pageProps.session}>
-    <NextUIProvider theme={themeConfig}>
-      {isDashboardRoute ? <AdminLayout>
-        <Component {...pageProps} />
-      </AdminLayout> :
-        <Component {...pageProps} />}
-    </NextUIProvider>
-  </SessionProvider>)
+  return (
+    <Provider store={store}>
+      <NextUIProvider theme={themeConfig}>
+        {isDashboardRoute ? <AdminLayout>
+          <Component {...pageProps} />
+        </AdminLayout> :
+          <Component {...pageProps} />}
+      </NextUIProvider>
+    </Provider>)
 }

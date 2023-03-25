@@ -1,4 +1,3 @@
-import Header from "@/components/header";
 import SidePanel from "@/components/sidepanel";
 import React from "react";
 

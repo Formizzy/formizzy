@@ -1,13 +1,18 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import Icons from "../icons";
 import { sidePanelMenus } from "./@core/sidepanel.config";
 
 export default function SidePanel() {
 
     const router = useRouter();
+
+    useEffect(() => {
+
+    }, [])
+
+
 
     const theSidePanelMenus = sidePanelMenus.map(menu => {
         const isLinkActive = router.pathname === menu.menuLink
@@ -42,14 +47,13 @@ export default function SidePanel() {
             {/* profile section */}
             <div className=" flex my-3 justify-between items-center">
                 <div className="flex ">
-                    <div className="bg-[url('https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')]
-                w-12 h-12 bg-cover bg-center rounded-lg mx-3" />
+                    <div style={{ backgroundImage: `url(${session?.user?.image})` }} className={` w-12 h-12 bg-cover bg-center rounded-lg mx-3`} />
                     <div >
-                        <span className="text-sm font-semibold ">Kartik Jetani</span>
+                        <span className="text-sm font-semibold ">{session?.user?.name}</span>
                         <p className="text-xs text-fi-gray">Free Account</p>
                     </div>
                 </div>
-                <div className="text-fi-gray hover:text-primary mr-2 cursor-pointer">
+                <div onClick={() => { }} className="text-fi-gray hover:text-primary mr-2 cursor-pointer">
                     <Icons iconName="Logout" />
                 </div>
             </div>

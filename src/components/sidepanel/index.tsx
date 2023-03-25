@@ -1,15 +1,28 @@
+import { getApi } from "@/utils/apiUtils";
+import { getCookie } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { logOut } from "../auth/@core/authUtils";
 import Icons from "../icons";
 import { sidePanelMenus } from "./@core/sidepanel.config";
 
 export default function SidePanel() {
 
+    const [userData, setUserData] = useState()
     const router = useRouter();
 
     useEffect(() => {
-
+        fetch("http://localhost:3001/get-user-profile", {
+            headers: {
+                "Authorization": getCookie("session-token")?.toString() ?? ""
+            }
+        }).then(data => data.json())
+            .then(data => {
+                console.log(data)
+                setUserData(data?.user)
+            }).catch(er => { console.log(er) }
+            )
     }, [])
 
 
@@ -47,13 +60,13 @@ export default function SidePanel() {
             {/* profile section */}
             <div className=" flex my-3 justify-between items-center">
                 <div className="flex ">
-                    <div style={{ backgroundImage: `url(${session?.user?.image})` }} className={` w-12 h-12 bg-cover bg-center rounded-lg mx-3`} />
+                    <div style={{ backgroundImage: `url(${userData?.image})` }} className={` w-12 h-12 bg-cover bg-center rounded-lg mx-3`} />
                     <div >
-                        <span className="text-sm font-semibold ">{session?.user?.name}</span>
+                        <span className="text-sm font-semibold ">{userData?.firstName}</span>
                         <p className="text-xs text-fi-gray">Free Account</p>
                     </div>
                 </div>
-                <div onClick={() => { }} className="text-fi-gray hover:text-primary mr-2 cursor-pointer">
+                <div onClick={() => { logOut() }} className="text-fi-gray hover:text-primary mr-2 cursor-pointer">
                     <Icons iconName="Logout" />
                 </div>
             </div>

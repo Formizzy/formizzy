@@ -1,3 +1,5 @@
+import { deleteCookie } from "cookies-next";
+
 export const getGoogleAuthUrl = () => {
     const rootUrl = `https://accounts.google.com/o/oauth2/v2/auth`;
 
@@ -18,3 +20,7 @@ export const getGoogleAuthUrl = () => {
     return `${rootUrl}?${qs.toString()}`;
 };
 
+export function logOut() {
+    deleteCookie("session-token")
+    window.location.href = "/login"
+}

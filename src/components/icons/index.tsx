@@ -9,7 +9,8 @@ export type IconProps = {
     | "Analytics"
     | "Form"
     | "Settings"
-    | "Logout";
+    | "Logout"
+    | "delete";
 
   className?: string;
 };
@@ -155,6 +156,54 @@ function Icons(props: IconProps) {
             fill-rule="evenodd"
             clip-rule="evenodd"
             d="M7.24596 8.35841C6.88138 8.35841 6.5931 8.64175 6.5931 9.00008C6.5931 9.35008 6.88138 9.64175 7.24596 9.64175H12.3332V13.6251C12.3332 15.6667 10.6459 17.3334 8.56016 17.3334H4.43104C2.35376 17.3334 0.666504 15.6751 0.666504 13.6334V4.37508C0.666504 2.32508 2.36224 0.666748 4.43952 0.666748H8.57712C10.6459 0.666748 12.3332 2.32508 12.3332 4.36675V8.35841H7.24596ZM15.3584 6.11692L17.7917 8.54192C17.9167 8.66692 17.9834 8.82525 17.9834 9.00025C17.9834 9.16692 17.9167 9.33359 17.7917 9.45025L15.3584 11.8753C15.2334 12.0003 15.0667 12.0669 14.9084 12.0669C14.7417 12.0669 14.575 12.0003 14.45 11.8753C14.2 11.6253 14.2 11.2169 14.45 10.9669L15.7834 9.64192H12.3334V8.35859H15.7834L14.45 7.03359C14.2 6.78359 14.2 6.37525 14.45 6.12525C14.7 5.86692 15.1084 5.86692 15.3584 6.11692Z"
+          />
+        </svg>
+      );
+      break;
+
+    case "delete":
+      theIcon = (
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="fill-current"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M17.5 4.98332C14.725 4.70832 11.9333 4.56665 9.15 4.56665C7.5 4.56665 5.85 4.64998 4.2 4.81665L2.5 4.98332"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M7.08331 4.14169L7.26665 3.05002C7.39998 2.25835 7.49998 1.66669 8.90831 1.66669H11.0916C12.5 1.66669 12.6083 2.29169 12.7333 3.05835L12.9166 4.14169"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M15.7084 7.61664L15.1667 16.0083C15.075 17.3166 15 18.3333 12.675 18.3333H7.32502C5.00002 18.3333 4.92502 17.3166 4.83335 16.0083L4.29169 7.61664"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M8.60834 13.75H11.3833"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M7.91669 10.4167H12.0834"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       );

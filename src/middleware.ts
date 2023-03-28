@@ -6,8 +6,8 @@ import { isUserLoggedIn } from "./utils/common";
 export async function middleware(request: NextRequest) {
     const sessionToken = request.cookies.get("session-token")?.value
 
-    const isLoggedIn = await isUserLoggedIn(sessionToken)
-    // const isLoggedIn = false
+    // const isLoggedIn = await isUserLoggedIn(sessionToken)
+    const isLoggedIn = true;
     console.log("--------->", isLoggedIn);
     // const isLoggedIn = !!sessionToken
 

@@ -6,10 +6,15 @@ import React, { useEffect, useState } from "react";
 import { logOut } from "../auth/@core/authUtils";
 import Icons from "../icons";
 import { sidePanelMenus } from "./@core/sidepanel.config";
+import ProfileImage from "./@core/ProfileImage";
+import { Button } from "@nextui-org/react";
+import { Modal, Text, Input, Row, Checkbox } from "@nextui-org/react";
+import Popup from "./@core/PopUp";
+
 
 export default function SidePanel() {
 
-    const [userData, setUserData] = useState()
+    const [userData, setUserData] = useState<any>()
     const router = useRouter();
 
     useEffect(() => {
@@ -58,16 +63,23 @@ export default function SidePanel() {
             </div>
 
             {/* profile section */}
-            <div className=" flex my-3 justify-between items-center">
-                <div className="flex ">
-                    <div style={{ backgroundImage: `url(${userData?.image})` }} className={` w-12 h-12 bg-cover bg-center rounded-lg mx-3`} />
-                    <div >
-                        <span className="text-sm font-semibold ">{userData?.firstName}</span>
-                        <p className="text-xs text-fi-gray">Free Account</p>
+            {/* <div className=" flex my-3 justify-between flex-col items-center"> */}
+            <div>
+                {/* <Button className="m-auto" size="sm">Create New Form</Button>; */}
+                <Popup/>
+                <div className=" flex my-3 justify-between items-center">
+                    {/* <ProfileImage name="kartik jetani" /> */}
+                    <div className="flex ">
+                        <div style={{ backgroundImage: `url(${userData?.image})` }} className={` w-12 h-12 bg-cover bg-center rounded-lg mx-3`} />
+                        <div className="flex">
+                            <span className="text-sm font-semibold ">{userData?.firstName}</span>
+                            <p className="text-xs text-fi-gray">Free Account</p>
+                        </div>
                     </div>
-                </div>
-                <div onClick={() => { logOut() }} className="text-fi-gray hover:text-primary mr-2 cursor-pointer">
-                    <Icons iconName="Logout" />
+                    <div onClick={() => { logOut() }} className="text-fi-gray hover:text-primary mr-2 cursor-pointer">
+                        <Icons iconName="Logout" />
+                    </div>
+                    {/* </div> */}
                 </div>
             </div>
         </aside>
